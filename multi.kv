@@ -1,0 +1,252 @@
+ScreenManager:
+	MainScreen:
+	Another:
+	# Settings:
+
+# Custom button
+<CustButton@Button>:
+    font_size: 96
+	
+<MainScreen>:
+	name: "main"
+	GridLayout:
+		id: calculator
+		display: entry
+		rows: 2
+		size_hint: 1, 0.92
+		padding: 10 # margin around child widget
+		spacing: 0 # space between sibling widget
+			
+		BoxLayout:
+			size_hint: 1, 0.25	
+			rows: 2		
+			do_rotation: False
+			padding: 10 # margin around child widget
+			BoxLayout:
+				spacing: 0
+				orientation: 'vertical'
+				TextInput:
+					id: entry
+					font_size: 96
+					multiline: False
+					size_hint: 1, 1.5
+					halign: 'right'
+					valign: 'center'
+					readonly: True
+					focus: False
+					use_bubble: False
+				TextInput:
+					id: buffer
+					font_size: 72
+					multiline: False
+					halign: 'right'
+					valign: 'center'
+					readonly: True
+					focus: False
+					use_bubble: False
+					#on_touch_up: print(root.steps_list)
+		BoxLayout:
+			size_hint: 1, 0.75	
+			rows: 7		
+			padding: 10
+			spacing: 10 
+			orientation: 'vertical'
+			do_rotation: False
+			BoxLayout:
+				spacing: 10			
+				CustButton:
+					text: "("
+					font_size: 72
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: ")"
+					font_size: 72
+					on_press: app.calc.composeBuff(self.text)
+
+				CustButton:
+					text: "<x"
+					font_size: 72
+					on_press: app.calc.back()			
+				CustButton:
+					font_size: 48
+					on_press: app.root.current = "other"
+					text: "Menu"
+					
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "MC"
+					font_size: 64
+					on_press: app.calc.clearMemory()		
+				CustButton:
+					text: "M+"
+					font_size: 64
+					on_press: app.calc.inscMemory()			
+				CustButton:
+					text: "M-"
+					font_size: 64
+					on_press: app.calc.descMemory()
+				CustButton:
+					text: "MR"
+					font_size: 64
+					on_press: app.calc.composeBuff(self.text)
+					
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "AC"
+					font_size: 64
+					on_press: app.calc.allClear(True)
+				CustButton:
+					text: "±"
+					on_press: app.calc.descMemory()
+				CustButton:
+					text: "%"
+					on_press: app.calc.descMemory()
+				CustButton:
+					text: "÷"
+					font_size: 72
+					on_press: app.calc.composeBuff("/")	
+							
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "7"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "8"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "9"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "x"
+					font_size: 72
+					on_press: app.calc.composeBuff("*")
+							
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "4"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "5"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "6"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "-"
+					font_size: 120
+					on_press: app.calc.composeBuff(self.text)
+
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "1"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "2"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "3"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "+"
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+					
+			BoxLayout:
+				spacing: 10
+				CustButton:
+					text: "0"
+					font_size: 96
+					size_hint: 2.05, 1
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "."
+					font_size: 96
+					on_press: app.calc.composeBuff(self.text)
+				CustButton:
+					text: "="
+					font_size: 96
+					on_press: app.calc.calculate()
+
+<Another>:
+	name: "other"	
+	id: other
+	
+	GridLayout:
+		size_hint: 1, 0.92
+		rows: 1
+		padding: 10 # margin around child widget
+		spacing: 0 # space between sibling widget
+			
+		BoxLayout:
+			size_hint: 1, 0.6
+			orientation: 'vertical'
+			padding: 10 # margin around child widget
+			Button:
+				text: "Settings"
+				size_hint_y: 0.1
+				on_release: app.root.current = "setting"
+			Button:
+				text: "Theme"
+				size_hint_y: 0.1
+				on_release: pass
+			Button:
+				text: "Help"
+				size_hint_y: 0.1
+				on_release:	pass		
+			Button:
+				color: 0,1,0,1
+				size_hint_y: 0.1
+				text: "Close"
+				on_release: app.root.current = "main" 
+				pos_hint: {"right":1, "top":1}	
+			Label:
+				size_hint_y: 0.6
+				text: "contact: shiroby@gmail.com"
+			
+<Settings>:
+	name: "setting"	
+	id: setting
+	
+	GridLayout:
+		size_hint: 1, 0.92
+		rows: 1
+		padding: 10 # margin around child widget
+		spacing: 0 # space between sibling widget
+			
+		BoxLayout:
+			size_hint: 0.3, 1
+			orientation: 'vertical'
+			padding: 10 # margin around child widget
+			Button:
+				text: "Sound"
+				size_hint_y: 0.1
+			Button:
+				text: "Seperator"
+				size_hint_y: 0.1
+				on_release: pass
+			Button:
+				text: "digits under period"
+				size_hint_y: 0.1
+				on_release:	pass
+			Button:
+				color: 0,1,0,1
+				size_hint_y: 0.1
+				text: "Close"
+				on_release: app.root.current = "other" 
+				pos_hint: {"right":1, "top":1}	
+			BoxLayout:
+				size_hint_y: 0.6

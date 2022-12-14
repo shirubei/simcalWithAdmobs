@@ -93,6 +93,7 @@ Builder.load_file("./multi.kv")
 class MainApp(App):
     def on_start(self):
         self.banner_ad = autoclass('adSwitch').alloc().init()
+        #for Object-C part, check https://gist.github.com/shirubei/65cb741eadd64a71d5e7cc3eaaf5567e
     
     def show_banner(self):
         self.banner_ad.show_ads()
